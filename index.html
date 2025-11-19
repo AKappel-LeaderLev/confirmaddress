@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConfirmAddress - Admin</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ConfirmAddress.app</h1>
+            <p class="subtitle">Your Personal Address Collection Tool</p>
+        </div>
+
+        <!-- Password Protection -->
+        <div id="loginScreen" class="card">
+            <h2>Admin Access</h2>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter your password" onkeypress="handlePasswordKeypress(event)">
+            </div>
+            <button onclick="checkPassword()">Unlock</button>
+            <p id="loginError" class="error-message" style="display:none;">Incorrect password</p>
+        </div>
+
+        <!-- Admin Dashboard (hidden until login) -->
+        <div id="adminDashboard" style="display:none;">
+            
+            <!-- Settings Section -->
+            <div class="card">
+                <h2>Settings</h2>
+                
+                <div class="form-group">
+                    <label>Company Logo URL <span class="optional">(optional)</span></label>
+                    <input type="text" id="logoUrl" placeholder="https://example.com/logo.png">
+                    <small>Your logo will appear on recipient confirmation pages</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Custom Domain <span class="optional">(optional)</span></label>
+                    <input type="text" id="customDomain" placeholder="confirmaddress.app" value="confirmaddress.app">
+                    <small>This will be used in generated URLs</small>
+                </div>
+
+                <button onclick="saveSettings()" class="button-secondary">Save Settings</button>
+                <p id="settingsSaved" class="success-message" style="display:none;">Settings saved!</p>
+            </div>
+
+            <!-- Create New Form -->
+            <div class="card">
+                <h2>Create New Confirmation Link</h2>
+                
+                <div class="form-group">
+                    <label>Recipient Name</label>
+                    <input type="text" id="recipientName" placeholder="Greg Segall">
+                </div>
+
+                <div class="form-group">
+                    <label>Pre-filled Address <span class="optional">(optional)</span></label>
+                    <textarea id="preFilledAddress" placeholder="22 Bond Street&#10;Apt 308&#10;Watertown, MA 02472" rows="3"></textarea>
+                </div>
+
+                <button onclick="createForm()">Generate Link</button>
+            </div>
+
+            <!-- Generated Link Display -->
+            <div id="linkResult" class="card" style="display:none;">
+                <div class="success-message">Link created successfully!</div>
+                
+                <div class="form-group">
+                    <label>Generated URL</label>
+                    <div class="url-display">
+                        <input type="text" id="generatedUrl" readonly class="url-input">
+                        <button onclick="copyLink()" class="copy-btn" id="copyBtn">Copy</button>
+                    </div>
+                </div>
+
+                <button onclick="resetForm()" class="button-secondary">Create Another</button>
+            </div>
+
+            <!-- Recent Confirmations -->
+            <div class="card">
+                <h2>Recent Confirmations</h2>
+                <button onclick="loadConfirmations()" class="button-secondary" style="margin-bottom: 20px;">Refresh List</button>
+                
+                <div id="confirmationsList">
+                    <p class="loading">Loading...</p>
+                </div>
+
+                <a href="#" onclick="openGoogleSheet(); return false;" class="link">View All in Google Sheets →</a>
+            </div>
+
+            <!-- Logout -->
+            <div style="text-align: center; margin-top: 30px;">
+                <button onclick="logout()" class="button-secondary">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
