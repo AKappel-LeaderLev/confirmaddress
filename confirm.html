@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your Address - ConfirmAddress.app</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Loading State -->
+        <div id="loadingScreen" class="card">
+            <p style="text-align: center;">Loading...</p>
+        </div>
+
+        <!-- Form Not Found -->
+        <div id="notFoundScreen" class="card" style="display:none;">
+            <h1>Form Not Found</h1>
+            <p>This confirmation link is invalid or has expired.</p>
+        </div>
+
+        <!-- Confirmation Form -->
+        <div id="confirmationForm" style="display:none;">
+            
+            <!-- Greeting -->
+            <div class="greeting" id="greeting"></div>
+
+            <div class="card">
+                
+                <!-- Preview Mode (Pre-filled Address) -->
+                <div id="previewMode">
+                    <div class="address-preview editable-address" onclick="enableEditing()">
+                        <div id="previewName" class="address-name"></div>
+                        <div id="previewAddress"></div>
+                    </div>
+                    <div class="edit-hint">Click to edit address</div>
+                    <button onclick="confirmAddress()" style="margin-top: 20px;">Confirm Address</button>
+                </div>
+
+                <!-- Edit Mode -->
+                <div id="editMode" style="display:none;">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="name" placeholder="Your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Street Address</label>
+                        <input type="text" id="line1" placeholder="123 Main St">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apt, Suite, etc. <span class="optional">(optional)</span></label>
+                        <input type="text" id="line2" placeholder="Apt 4B">
+                    </div>
+
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" id="city" placeholder="Watertown">
+                    </div>
+
+                    <div style="display: flex; gap: 12px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label>State</label>
+                            <input type="text" id="state" placeholder="MA" maxlength="2">
+                        </div>
+
+                        <div class="form-group" style="flex: 1;">
+                            <label>ZIP Code</label>
+                            <input type="text" id="zip" placeholder="02472" maxlength="5">
+                        </div>
+                    </div>
+
+                    <button onclick="confirmAddress()" id="confirmBtn">Confirm Address</button>
+                    
+                    <button onclick="showPreview()" class="button-secondary" id="previewBtn" style="margin-top: 12px; display:none;">
+                        Preview
+                    </button>
+                </div>
+
+                <!-- Company Logo -->
+                <div class="footer-logo" id="footerLogo" style="display:none;">
+                    <img id="companyLogo" src="" alt="Company Logo" style="max-width: 200px; max-height: 60px;">
+                </div>
+
+                <div class="footer-logo">
+                    <div class="footer-logo-text">Powered by ConfirmAddress.app</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="successScreen" class="card" style="display:none;">
+            <div class="checkmark">✓</div>
+            <h1>Thanks!</h1>
+            <p class="subtitle">Your address has been confirmed.</p>
+        </div>
+
+    </div>
+
+    <script src="confirm.js"></script>
+</body>
+</html>
